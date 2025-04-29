@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StreamFlix - Your Ultimate Streaming Platform</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-black text-white">
+    <!-- Navigation -->
+    <nav id="mainNav" class="fixed w-full z-50 transition-all duration-300">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-8">
+                <div class="flex items-center">
+                    <i class="fas fa-film text-red-600 text-3xl mr-2"></i>
+                    <span class="text-2xl font-bold">StreamFlix</span>
+                </div>
+                <div class="hidden lg:flex space-x-6">
+                    <a href="#" class="hover:text-gray-300 transition">Home</a>
+                    <a href="#movies" class="hover:text-gray-300 transition">Movies</a>
+                    <a href="#series" class="hover:text-gray-300 transition">TV Shows</a>
+                    <a href="#new" class="hover:text-gray-300 transition">New & Popular</a>
+                    <a href="#mylist" class="hover:text-gray-300 transition">My List</a>
+                </div>
+            </div>
+            <div class="flex items-center space-x-4">
+                <div class="relative hidden md:block">
+                    <input type="text" placeholder="Search" class="bg-black bg-opacity-70 border border-gray-700 rounded px-4 py-1 w-64 focus:outline-none focus:border-gray-500">
+                    <i class="fas fa-search absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                </div>
+                <button id="userMenuBtn" class="hidden">
+                    <div class="w-8 h-8 rounded bg-red-600 flex items-center justify-center">
+                        <span id="userInitial">U</span>
+                    </div>
+                </button>
+                <button onclick="openAuthModal()" id="loginBtn" class="bg-red-600 hover:bg-red-700 px-4 py-1 rounded text-sm font-medium transition">
+                    Sign In
+                </button>
+                <button class="lg:hidden text-white">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative h-screen">
+        <div class="absolute inset-0 bg-black opacity-50"></div>
+        <img src="https://image.tmdb.org/t/p/original/9dKCd55IuTT5QRs989m9Qlb7d2B.jpg" alt="Featured Movie" class="w-full h-full object-cover">
+        <div class="hero-gradient absolute inset-0 flex items-center">
+            <div class="container mx-auto px-4">
+                <h1 class="text-4xl md:text-6xl font-bold mb-4">Stranger Things</h1>
+                <p class="text-lg md:text-xl max-w-2xl mb-6">When a young boy vanishes, a small town uncovers a mystery involving secret experiments, terrifying supernatural forces, and one strange little girl.</p>
+                <div class="flex space-x-4">
+                    <button class="bg-white text-black px-6 py-2 rounded flex items-center hover:bg-opacity-80 transition">
+                        <i class="fas fa-play mr-2"></i> Play
+                    </button>
+                    <button class="bg-gray-600 bg-opacity-70 text-white px-6 py-2 rounded flex items-center hover:bg-opacity-50 transition">
+                        <i class="fas fa-info-circle mr-2"></i> More Info
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="relative z-10 -mt-20">
+        <!-- Categories Tabs -->
+        <div class="container mx-auto px-4 mb-8">
+            <div class="flex overflow-x-auto space-x-8 pb-2 scrollbar-hide">
+                <button class="category-tab active text-lg font-medium whitespace-nowrap px-1 pb-1">Popular on StreamFlix</button>
+                <button class="category-tab text-lg font-medium whitespace-nowrap px-1 pb-1">Trending Now</button>
+                <button class="category-tab text-lg font-medium whitespace-nowrap px-1 pb-1">TV Shows</button>
+                <button class="category-tab text-lg font-medium whitespace-nowrap px-1 pb-1">Movies</button>
+                <button class="category-tab text-lg font-medium whitespace-nowrap px-1 pb-1">New Releases</button>
+                <button class="category-tab text-lg font-medium whitespace-nowrap px-1 pb-1">Action</button>
+                <button class="category-tab text-lg font-medium whitespace-nowrap px-1 pb-1">Comedies</button>
+            </div>
+        </div>
+
+        <!-- Movie Rows -->
+        <section id="movies" class="container mx-auto px-4 mb-12">
+            <h2 class="text-xl md:text-2xl font-bold mb-4">Popular on StreamFlix</h2>
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-2">
+                <!-- Movie Card 1 -->
+                <div class="movie-card relative transition-transform duration-300">
+                    <img src="https://image.tmdb.org/t/p/w500/1pdfLvkbY9ohJlCjQH2CZjjYVvJ.jpg" alt="Movie Poster" class="w-full h-auto rounded">
+                    <div class="movie-info absolute inset-0 bg-black bg-opacity-80 p-4 rounded flex flex-col justify-end">
+                        <h3 class="font-bold text-lg">The Witcher</h3>
+                        <div class="flex items-center text-sm mb-2">
+                            <span class="text-green-500 mr-2">97% Match</span>
+                            <span>3 Seasons</span>
+                        </div>
+                        <div class="flex space-x-2 mb-2">
+                            <span class="text-xs border border-gray-400 px-1">HD</span>
+                            <span class="text-xs border border-gray-400 px-1">4K</span>
+                            <span class="text-xs border border-gray-400 px-1">Dolby</span>
+                        </div>
+                        <p class="text-sm text-gray-300 line-clamp-2">Geralt of Rivia, a solitary monster hunter, struggles to find his place in a world where people often prove more wicked than beasts.</p>
+                    </div>
+                </div>
+                
+                <!-- Movie Card 2 -->
+                <div class="movie-card relative transition-transform duration-300">
+                    <img src="https://image.tmdb.org/t/p/w500/8Vt6mWEReuy4Of61Lnj5Xj704m8.jpg" alt="Movie Poster" class="w-full h-auto rounded">
+                    <div class="movie-info absolute inset-0 bg-black bg-opacity-80 p-4 rounded flex flex-col justify-end">
+                        <h3 class="font-bold text-lg">Spider-Man: No Way Home</h3>
+                        <div class="flex items-center text-sm mb-2">
+                            <span class="text-green-500 mr-2">93% Match</span>
+                            <span>2021</span>
+                        </div>
+                        <div class="flex space-x-2 mb-2">
+                            <span class="text-xs border border-gray-400 px-1">HD</span>
+                            <span class="text-xs border border-gray-400 px-1">Dolby</span>
+                        </div>
+                        <p class="text-sm text-gray-300 line-clamp-2">Peter Parker is unmasked and no longer able to separate his normal life from the high-stakes of being a superhero.</p>
+                    </div>
+                </div>
+                
+                <!-- Movie Card 3 -->
+                <div class="movie-card relative transition-transform duration-300">
+                    <img src="https://image.tmdb.org/t/p/w500/6DrHO1jr3qVrViUO6s6kFiAGM7.jpg" alt="Movie Poster" class="w-full h-auto rounded">
+                    <div class="movie-info absolute inset-0 bg-black bg-opacity-80 p-4 rounded flex flex-col justify-end">
+                        <h3 class="font-bold text-lg">The Batman</h3>
+                        <div class="flex items-center text-sm mb-2">
+                            <span class="text-green-500 mr-2">87% Match</span>
+                            <span>2022</span>
+                        </div>
+                        <div class="flex space-x-2 mb-2">
+                            <span class="text-xs border border-gray-400 px-1">HD</span>
+                            <span class="text-xs border border-gray-400 px-1">4K</span>
+                        </div>
+                        <p class="text-sm text-gray-300 line-clamp-2">When a sadistic serial killer begins murdering key political figures in Gotham, Batman is forced to investigate.</p>
+                    </div>
+                </div>
+                
+                <!-- Movie Card 4 -->
+                <div class="movie-card relative transition-transform duration-300">
+                    <img src="https://image.tmdb.org/t/p/w500/1g0dhYtq4irTY1GPXvft6k4YLjm.jpg" alt="Movie Poster" class="w-full h-auto rounded">
+                    <div class="movie-info absolute inset-0 bg-black bg-opacity-80 p-4 rounded flex flex-col justify-end">
+                        <h3 class="font-bold text-lg">Spider-Man: Across the Spider-Verse</h3>
+                        <div class="flex items-center text-sm mb-2">
+                            <span class="text-green-500 mr-2">95% Match</span>
+                            <span>2023</span>
+                        </div>
+                        <div class="flex space-x-2 mb-2">
+                            <span class="text-xs border border-gray-400 px-1">HD</span>
+                            <span class="text-xs border border-gray-400 px-1">4K</span>
+                        </div>
+                        <p class="text-sm text-gray-300 line-clamp-2">Miles Morales catapults across the Multiverse, where he encounters a team of Spider-People charged with protecting its very existence.</p>
+                    </div>
+                </div>
+                
+                <!-- Movie Card 5 -->
+                <div class="movie-card relative transition-transform duration-300">
+                    <img src="https://image.tmdb.org/t/p/w500/8Vt6mWEReuy4Of61Lnj5Xj704m8.jpg" alt="Movie Poster" class="w-full h-auto rounded">
+                    <div class="movie-info absolute inset-0 bg-black bg-opacity-80 p-4 rounded flex flex-col justify-end">
+                        <h3 class="font-bold text-lg">Dune</h3>
+                        <div class="flex items-center text-sm mb-2">
+                            <span class="text-green-500 mr-2">84% Match</span>
+                            <span>2021</span>
+                        </div>
+                        <div class="flex space-x-2 mb-2">
+                            <span class="text-xs border border-gray-400 px-1">HD</span>
+                            <span class="text-xs border border-gray-400 px-1">Dolby</span>
+                        </div>
+                        <p class="text-sm text-gray-300 line-clamp-2">Feature adaptation of Frank Herbert's science fiction novel about the son of a noble family entrusted with the protection of the most valuable asset in the galaxy.</p>
+                    </div>
+                </div>
+                
+                <!-- Movie Card 6 -->
+                <div class="movie-card relative transition-transform duration-300">
+                    <img src="https://image.tmdb.org/t/p/w500/1pdfLvkbY9ohJlCjQH2CZjjYVvJ.jpg" alt="Movie Poster" class="w-full h-auto rounded">
+                    <div class="movie-info absolute inset-0 bg-black bg-opacity-80 p-4 rounded flex flex-col justify-end">
+                        <h3 class="font-bold text-lg">The Last of Us</h3>
+                        <div class="flex items-center text-sm mb-2">
+                            <span class="text-green-500 mr-2">96% Match</span>
+                            <span>1 Season</span>
+                        </div>
+                        <div class="flex space-x-2 mb-2">
+                            <span class="text-xs border border-gray-400 px-1">HD</span>
+                            <span class="text-xs border border-gray-400 px-1">4K</span>
+                        </div>
+                        <p class="text-sm text-gray-300 line-clamp-2">After a global pandemic destroys civilization, a hardened survivor takes charge of a 14-year-old girl who may be humanity's last hope.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- More Movie Rows -->
+        <section id="series" class="container mx-auto px-4 mb-12">
+            <h2 class="text-xl md:text-2xl font-bold mb-4">Trending Now</h2>
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-2">
+                <!-- Movie Card 1 -->
+                <div class="movie-card relative transition-transform duration-300">
+                    <img src="https://image.tmdb.org/t/p/w500/6DrHO1jr3qVrViUO6s6kFiAGM7.jpg" alt="Movie Poster" class="w-full h-auto rounded">
+                    <div class="movie-info absolute inset-0 bg-black bg-opacity-80 p-4 rounded flex flex-col justify-end">
+                        <h3 class="font-bold text-lg">Peaky Blinders</h3>
+                        <div class="flex items-center text-sm mb-2">
+                            <span class="text-green-500 mr-2">94% Match</span>
+                            <span>6 Seasons</span>
+                        </div>
+                        <div class="flex space-x-2 mb-2">
+                            <span class="text-xs border border-gray-400 px-1">HD</span>
+                            <span class="text-xs border border-gray-400 px-1">Dolby</span>
+                        </div>
+                        <p class="text-sm text-gray-300 line-clamp-2">A notorious gang in 1919 Birmingham, England, is led by the fierce Tommy Shelby, a crime boss set on moving up in the world.</p>
+                    </div>
+                </div>
+                
+                <!-- Movie Card 2 -->
+                <div class="movie-card relative transition-transform duration-300">
+                    <img src="https://image.tmdb.org/t/p/w500/1g0dhYtq4irTY1GPXvft6k4YLjm.jpg" alt="Movie Poster" class="w-full h-auto rounded">
+                    <div class="movie-info absolute inset-0 bg-black bg-opacity-80 p-4 rounded flex flex-col justify-end">
+                        <h3 class="font-bold text-lg">The Mandalorian</h3>
+                        <div class="flex items-center text-sm mb-2">
+                            <span class="text-green-500 mr-2">92% Match</span>
+                            <span>3 Seasons</span>
+                        </div>
+                        <div class="flex space-x-2 mb-2">
+                            <span class="text-xs border border-gray-400 px-1">HD</span>
+                            <span class="text-xs border border-gray-400 px-1">4K</span>
+                        </div>
+                        <p class="text-sm text-gray-300 line-clamp-2">After the fall of the Galactic Empire, a lone gunfighter makes his way through the lawless galaxy.</p>
+                    </div>
+                </div>
+                
+                <!-- Movie Card 3 -->
+                <div class="movie-card relative transition-transform duration-300">
+                    <img src="https://image.tmdb.org/t/p/w500/8Vt6mWEReuy4Of61Lnj5Xj704m8.jpg" alt="Movie Poster" class="w-full h-auto rounded">
+                    <div class="movie-info absolute inset-0 bg-black bg-opacity-80 p-4 rounded flex flex-col justify-end">
+                        <h3 class="font-bold text-lg">Oppenheimer</h3>
+                        <div class="flex items-center text-sm mb-2">
+                            <span class="text-green-500 mr-2">89% Match</span>
+                            <span>2023</span>
+                        </div>
+                        <div class="flex space-x-2 mb-2">
+                            <span class="text-xs border border-gray-400 px-1">HD</span>
+                            <span class="text-xs border border-gray-400 px-1">4K</span>
+                        </div>
+                        <p class="text-sm text-gray-300 line-clamp-2">The story of American scientist J. Robert Oppenheimer and his role in the development of the atomic bomb.</p>
+                    </div>
+                </div>
+                
+                <!-- Movie Card 4 -->
+                <div class="movie-card relative transition-transform duration-300">
+                    <img src="https://image.tmdb.org/t/p/w500/1pdfLvkbY9ohJlCjQH2CZjjYVvJ.jpg" alt="Movie Poster" class="w-full h-auto rounded">
+                    <div class="movie-info absolute inset-0 bg-black bg-opacity-80 p-4 rounded flex flex-col justify-end">
+                        <h3 class="font-bold text-lg">House of the Dragon</h3>
+                        <div class="flex items-center text-sm mb-2">
+                            <span class="text-green-500 mr-2">88% Match</span>
+                            <span>1 Season</span>
+                        </div>
+                        <div class="flex space-x-2 mb-2">
+                            <span class="text-xs border border-gray-400 px-1">HD</span>
+                            <span class="text-xs border border-gray-400 px-1">4K</span>
+                        </div>
+                        <p class="text-sm text-gray-300 line-clamp-2">The Targaryen dynasty is at the absolute apex of its power, with more than 15 dragons under their yoke.</p>
+                    </div>
+                </div>
+                
+                <!-- Movie Card 5 -->
+                <div class="movie-card relative transition-transform duration-300">
+                    <img src="https://image.tmdb.org/t/p/w500/6DrHO1jr3qVrViUO6s6kFiAGM7.jpg" alt="Movie Poster" class="w-full h-auto rounded">
+                    <div class="movie-info absolute inset-0 bg-black bg-opacity-80 p-4 rounded flex flex-col justify-end">
+                        <h3 class="font-bold text-lg">Top Gun: Maverick</h3>
+                        <div class="flex items-center text-sm mb-2">
+                            <span class="text-green-500 mr-2">96% Match</span>
+                            <span>2022</span>
+                        </div>
+                        <div class="flex space-x-2 mb-2">
+                            <span class="text-xs border border-gray-400 px-1">HD</span>
+                            <span class="text-xs border border-gray-400 px-1">Dolby</span>
+                        </div>
+                        <p class="text-sm text-gray-300 line-clamp-2">After more than thirty years of service as one of the Navy's top aviators, Pete Mitchell is where he belongs.</p>
+                    </div>
+                </div>
+                
+                <!-- Movie Card 6 -->
+                <div class="movie-card relative transition-transform duration-300">
+                    <img src="https://image.tmdb.org/t/p/w500/1g0dhYtq4irTY1GPXvft6k4YLjm.jpg" alt="Movie Poster" class="w-full h-auto rounded">
+                    <div class="movie-info absolute inset-0 bg-black bg-opacity-80 p-4 rounded flex flex-col justify-end">
+                        <h3 class="font-bold text-lg">Wednesday</h3>
+                        <div class="flex items-center text-sm mb-2">
+                            <span class="text-green-500 mr-2">90% Match</span>
+                            <span>1 Season</span>
+                        </div>
+                        <div class="flex space-x-2 mb-2">
+                            <span class="text-xs border border-gray-400 px-1">HD</span>
+                            <span class="text-xs border border-gray-400 px-1">4K</span>
+                        </div>
+                        <p class="text-sm text-gray-300 line-clamp-2">Follows Wednesday Addams' years as a student, when she attempts to master her emerging psychic ability.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Authentication Modal -->
+    <div id="authModal" class="auth-modal fixed inset-0 bg-black bg-opacity-80 z-50 flex justify-end items-center modal-slide-out">
+        <div class="bg-black w-full max-w-md h-full overflow-y-auto">
+            <div class="p-8">
+                <div class="flex justify-between items-center mb-8">
+                    <h2 class="text-2xl font-bold">Sign In</h2>
+                    <button onclick="closeAuthModal()" class="text-gray-400 hover:text-white">
+                        <i class="fas fa-times text-2xl"></i>
+                    </button>
+                </div>
+                
+                <form id="loginForm" class="mb-8">
+                    <div class="mb-4">
+                        <input type="email" placeholder="Email or phone number" class="w-full bg-gray-800 bg-opacity-70 border border-gray-700 rounded px-4 py-3 focus:outline-none focus:border-gray-500">
+                    </div>
+                    <div class="mb-6">
+                        <input type="password" placeholder="Password" class="w-full bg-gray-800 bg-opacity-70 border border-gray-700 rounded px-4 py-3 focus:outline-none focus:border-gray-500">
+                    </div>
+                    <button type="submit" class="w-full bg-red-600 hover:bg-red-700 text-white py-3 rounded font-medium transition">
+                        Sign In
+                    </button>
+                    <div class="flex justify-between items-center mt-4 text-sm">
+                        <label class="flex items-center">
+                            <input type="checkbox" class="mr-2">
+                            <span>Remember me</span>
+                        </label>
+                        <a href="#" class="text-gray-400 hover:underline">Need help?</a>
+                    </div>
+                </form>
+                
+                <div class="text-center text-gray-400 mb-4">
+                    <span>New to StreamFlix? </span>
+                    <a href="#" class="text-white hover:underline">Sign up now</a>.
+                </div>
+                
+                <div class="text-xs text-gray-400">
+                    <p>This page is protected by Google reCAPTCHA to ensure you're not a bot. <a href="#" class="text-blue-500 hover:underline">Learn more</a>.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-black text-gray-400 py-12">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between mb-8">
+                <div class="mb-6 md:mb-0">
+                    <div class="flex items-center space-x-2 mb-4">
+                        <i class="fas fa-film text-red-600 text-2xl"></i>
+                        <span class="text-xl font-bold">StreamFlix</span>
+                    </div>
+                    <div class="flex space-x-4">
+                        <a href="#" class="hover:text-white"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="hover:text-white"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="hover:text-white"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="hover:text-white"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-8">
+                    <div>
+                        <h3 class="text-white font-medium mb-4">Company</h3>
+                        <ul class="space-y-2">
+                            <li><a href="#" class="hover:text-white">About Us</a></li>
+                            <li><a href="#" class="hover:text-white">Jobs</a></li>
+                            <li><a href="#" class="hover:text-white">Contact</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-white font-medium mb-4">Support</h3>
+                        <ul class="space-y-2">
+                            <li><a href="#" class="hover:text-white">FAQ</a></li>
+                            <li><a href="#" class="hover:text-white">Help Center</a></li>
+                            <li><a href="#" class="hover:text-white">Terms of Use</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-white font-medium mb-4">Legal</h3>
+                        <ul class="space-y-2">
+                            <li><a href="#" class="hover:text-white">Privacy Policy</a></li>
+                            <li><a href="#" class="hover:text-white">Cookie Preferences</a></li>
+                            <li><a href="#" class="hover:text-white">Corporate Information</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="pt-8 border-t border-gray-800">
+                <p class="text-sm">© 2023 StreamFlix. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
